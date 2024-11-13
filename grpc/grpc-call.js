@@ -65,7 +65,8 @@ module.exports = function (RED) {
                     if (typeof msg.metadata === 'object'){
                         Object.keys(msg.metadata).forEach(key => {
                             try {
-                                metadata.add(key, JSON.stringify(msg.metadata[key]));
+                                const val = typeof metadata[key] === "object" ? JSON.stringify(msg.metadata[key]) : msg.metadata[key];
+                                metadata.add(key, val);
                             } catch (e){
                                 node.error(e);
                             }
